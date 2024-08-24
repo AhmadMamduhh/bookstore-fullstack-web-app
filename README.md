@@ -23,21 +23,25 @@ The frontend is a React application built with Vite and TypeScript.
 
 ### Setup
 
-Navigate to the frontend directory:
+1. Navigate to the frontend directory:
 
-    cd frontend
+        cd frontend
 
-Install the dependencies:
+2. Create your `.env` file from `.env.example`. This file contains environment variables needed for the frontend:
 
-    yarn install
+        cp .env.example .env
+
+3. Install the dependencies:
+
+        yarn install
 
 ### Starting the Dev Server
 
 To start the Vite development server:
 
-    yarn dev
+        yarn dev
 
-This will run the frontend application on http://localhost:5173.
+This will run the frontend application on [http://localhost:5173](http://localhost:5173).
 
 ### Mock Server
 
@@ -47,9 +51,9 @@ To start the frontend with a mock server, which provides mock data for developme
 
 2. Run the mock server alongside Vite:
 
-    yarn dev:mock
+        yarn dev:mock
 
-This command will start `json-server` on http://localhost:3001 and Vite on http://localhost:5173. The mock server uses `db.json` to provide mock data.
+This command will start `json-server` on [http://localhost:3001](http://localhost:3001) and Vite on [http://localhost:5173](http://localhost:5173). The mock server uses `db.json` to provide mock data.
 
 ## Backend
 
@@ -57,13 +61,17 @@ The backend is an Express application built with TypeScript and Prisma for datab
 
 ### Setup
 
-Navigate to the backend directory:
+1. Navigate to the backend directory:
 
-    cd backend
+        cd backend
 
-Install the dependencies:
+2. Create your `.env` file from `.env.example`. This file contains environment variables needed for the backend:
 
-    yarn install
+        cp .env.example .env
+
+3. Install the dependencies:
+
+        yarn install
 
 ### Generating and Seeding the Database
 
@@ -71,21 +79,21 @@ To set up the database, you'll need to run migrations and seed the database. Use
 
 - Generate Prisma client and run migrations:
 
-    yarn prisma:migrate
+        yarn prisma:migrate
 
-This command will apply the database migrations.
+  This command will apply the database migrations.
 
 - Seed the database:
 
-    yarn prisma:seed
+        yarn prisma:seed
 
-This command will populate the database with initial data.
+  This command will populate the database with initial data.
 
 - Start the server:
 
-    yarn dev
+        yarn dev
 
-This will start the Express server on http://localhost:3000.
+  This will start the Express server on [http://localhost:3000](http://localhost:3000).
 
 ## Docker Compose
 
@@ -95,27 +103,27 @@ Docker Compose is used to manage multi-container Docker applications. The setup 
 
 - Start the services:
 
-    yarn docker:compose:up
+        yarn docker:compose:up
 
-This command will build and start the services defined in `docker-compose.yml`. It also runs database migrations and seeds the database.
+  This command will build and start the services defined in `docker-compose.yml`. It also runs database migrations and seeds the database.
 
 - Stop the services:
 
-    yarn docker:compose:down
+        yarn docker:compose:down
 
-This command will stop and remove the containers.
+  This command will stop and remove the containers.
 
 - Build the services:
 
-    yarn docker:compose:build
+        yarn docker:compose:build
 
-This command will build the Docker images for the services.
+  This command will build the Docker images for the services.
 
 - View logs:
 
-    yarn docker:compose:logs
+        yarn docker:compose:logs
 
-This command will stream the logs from all services.
+  This command will stream the logs from all services.
 
 ### Docker Compose File
 
