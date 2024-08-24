@@ -1,131 +1,144 @@
-Bookstore Web App
+# Bookstore Web App
+
 A full-stack bookstore application consisting of a React frontend and an Express backend, utilizing TypeScript and Docker for containerization. This guide will help you get started with both the frontend and backend development servers, including mock server setup, database management, and Docker Compose configuration.
 
-Table of Contents
-Frontend
-Setup
-Starting the Dev Server
-Mock Server
+## Table of Contents
 
-Backend
-Setup
-Generating and Seeding the Database
-Docker Compose
+- [Frontend](#frontend)
+  - [Setup](#setup)
+  - [Starting the Dev Server](#starting-the-dev-server)
+  - [Mock Server](#mock-server)
+- [Backend](#backend)
+  - [Setup](#setup-1)
+  - [Generating and Seeding the Database](#generating-and-seeding-the-database)
+- [Docker Compose](#docker-compose)
+  - [Commands](#commands)
+  - [Docker Compose File](#docker-compose-file)
+- [License](#license)
+- [Author](#author)
 
+## Frontend
 
-Frontend
 The frontend is a React application built with Vite and TypeScript.
 
-Setup
+### Setup
+
 Navigate to the frontend directory:
 
-cd frontend
+    cd frontend
 
 Install the dependencies:
 
-yarn install
+    yarn install
 
-Starting the Dev Server
+### Starting the Dev Server
+
 To start the Vite development server:
 
-yarn dev
+    yarn dev
 
 This will run the frontend application on http://localhost:5173.
 
-Mock Server
+### Mock Server
+
 To start the frontend with a mock server, which provides mock data for development:
 
-Install dependencies:
+1. Ensure you have `json-server` and `concurrently` installed, which are included in the `devDependencies` in your `package.json`.
 
-Ensure you have json-server and concurrently installed, which are included in the devDependencies in your package.json.
+2. Run the mock server alongside Vite:
 
-Run the mock server alongside Vite:
+    yarn dev:mock
 
-yarn dev:mock
+This command will start `json-server` on http://localhost:3001 and Vite on http://localhost:5173. The mock server uses `db.json` to provide mock data.
 
-This command will start json-server on http://localhost:3001 and Vite on http://localhost:5173. The mock server uses db.json to provide mock data.
+## Backend
 
-Backend
 The backend is an Express application built with TypeScript and Prisma for database interactions.
 
-Setup
+### Setup
+
 Navigate to the backend directory:
 
-cd backend
+    cd backend
 
 Install the dependencies:
 
-yarn install
+    yarn install
 
-Generating and Seeding the Database
+### Generating and Seeding the Database
+
 To set up the database, you'll need to run migrations and seed the database. Use the following commands:
 
-Generate Prisma client and run migrations:
+- Generate Prisma client and run migrations:
 
-yarn prisma:migrate
+    yarn prisma:migrate
 
 This command will apply the database migrations.
 
-Seed the database:
+- Seed the database:
 
-yarn prisma:seed
+    yarn prisma:seed
 
 This command will populate the database with initial data.
 
-Start the server:
+- Start the server:
 
-yarn dev
+    yarn dev
 
 This will start the Express server on http://localhost:3000.
 
-Docker Compose
+## Docker Compose
+
 Docker Compose is used to manage multi-container Docker applications. The setup includes a frontend, backend, and PostgreSQL database.
 
-Commands
-Start the services:
+### Commands
 
-yarn docker:compose:up
+- Start the services:
 
-This command will build and start the services defined in docker-compose.yml. It also runs database migrations and seeds the database.
+    yarn docker:compose:up
 
-Stop the services:
+This command will build and start the services defined in `docker-compose.yml`. It also runs database migrations and seeds the database.
 
-yarn docker:compose:down
+- Stop the services:
+
+    yarn docker:compose:down
 
 This command will stop and remove the containers.
 
-Build the services:
+- Build the services:
 
-yarn docker:compose:build
+    yarn docker:compose:build
 
 This command will build the Docker images for the services.
 
-View logs:
+- View logs:
 
-yarn docker:compose:logs
+    yarn docker:compose:logs
 
 This command will stream the logs from all services.
 
-Docker Compose File
-Here's a brief overview of the docker-compose.yml file:
+### Docker Compose File
 
-backend:
+Here's a brief overview of the `docker-compose.yml` file:
 
-Builds from the ./backend directory.
-Uses DATABASE_URL to connect to the PostgreSQL database.
-Runs Prisma migrations and seeds the database on startup.
-frontend:
+- **backend**:
+  - Builds from the `./backend` directory.
+  - Uses `DATABASE_URL` to connect to the PostgreSQL database.
+  - Runs Prisma migrations and seeds the database on startup.
 
-Builds from the ./frontend directory.
-Exposes port 5173 for the Vite development server.
-db:
+- **frontend**:
+  - Builds from the `./frontend` directory.
+  - Exposes port `5173` for the Vite development server.
 
-Uses the official postgres:14 image.
-Configured with environment variables for user, password, and database name.
-Exposes port 5432.
-License
+- **db**:
+  - Uses the official `postgres:14` image.
+  - Configured with environment variables for user, password, and database name.
+  - Exposes port `5432`.
+
+## License
+
 This project is licensed under the ISC License.
 
-Author
-Ahmed Mamdouh
+## Author
 
+Ahmed Mamdouh
