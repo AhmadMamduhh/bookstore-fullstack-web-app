@@ -143,10 +143,6 @@ Here's a brief overview of the `docker-compose.yml` file:
   - Configured with environment variables for user, password, and database name.
   - Exposes port `5432`.
 
-## License
-
-This project is licensed under the ISC License.
-
 ## Author
 
 Ahmed Mamdouh
