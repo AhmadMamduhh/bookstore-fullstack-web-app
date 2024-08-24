@@ -9,14 +9,14 @@ generator client {
 
 model Store {
   id      Int    @id @default(autoincrement())
-  name    String
+  name    String @unique
   address String
   books   StoreBook[]
 }
 
 model Book {
   id       Int    @id @default(autoincrement())
-  name     String
+  name     String @unique
   pages    Int
   author   Author @relation(fields: [authorId], references: [id])
   authorId Int
@@ -25,7 +25,7 @@ model Book {
 
 model Author {
   id    Int    @id @default(autoincrement())
-  name  String
+  name  String @unique
   books Book[]
 }
 
