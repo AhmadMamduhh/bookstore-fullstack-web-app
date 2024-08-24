@@ -15,14 +15,14 @@ services:
       - ./backend:/usr/src/app
     command: sh -c "yarn prisma migrate deploy && yarn prisma db seed && yarn start"
 
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "5173:5173"
-  #   volumes:
-  #     - ./frontend:/usr/src/app"
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/usr/src/app"
 
   db:
     image: postgres:14
