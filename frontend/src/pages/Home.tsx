@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Typography, Button, Grid, Card, CardContent, CardMedia, MenuItem, Select, InputLabel, FormControl, SelectChangeEvent } from '@mui/material';
+import { Box, Typography, Grid, FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import useBooks from '../data-hooks/useBooks';
 import { Book } from '../types/types';
 import PageHeader from '../components/layout/PageHeader';
 import SearchField from '../components/shared/SearchField';
+import BookCard from '../components/books/BookCard';
 
 const ShopPage: React.FC = () => {
   const { data: books = [], isLoading, error } = useBooks();
@@ -16,8 +17,6 @@ const ShopPage: React.FC = () => {
   const handleStoreFilterChange = (event: SelectChangeEvent<string>) => setStoreFilter(event.target.value);
   const handleSortByChange = (event: SelectChangeEvent<string>) => setSortBy(event.target.value as string);
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value);
-
-
 
   const filteredBooks = books
     .filter((book: Book) => !authorFilter || book.author.name.includes(authorFilter))
@@ -36,7 +35,6 @@ const ShopPage: React.FC = () => {
       <PageHeader title="Shop" />
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 2 }}>
         <Typography variant="h6" fontWeight={600}>Browse Books</Typography>
-
         <SearchField searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
       </Box>
       <Box sx={{ marginTop: 2.5, display: 'flex', gap: 2, width: "100%" }}>
@@ -65,21 +63,7 @@ const ShopPage: React.FC = () => {
       <Grid container spacing={2} sx={{ marginTop: 2 }}>
         {filteredBooks.map((book) => (
           <Grid item xs={12} sm={6} md={4} key={book.id}>
-            <Card>
-              <CardMedia component="img" image={'defaultCoverImage.png'} alt={book.name} />
-              <CardContent>
-                <Typography variant="h6">{book.name}</Typography>
-                <Typography variant="body2">{book.author.name}</Typography>
-                <Box sx={{ marginTop: 1 }}>
-                  {book.stores.map((storeBook) => (
-                    <Box key={storeBook.storeId}>
-                      <Typography variant="body2">{storeBook.store.name} - ${storeBook.price}</Typography>
-                      <Button variant="contained" color="secondary">Sell</Button>
-                    </Box>
-                  ))}
-                </Box>
-              </CardContent>
-            </Card>
+            <BookCard book={book} />
           </Grid>
         ))}
       </Grid>

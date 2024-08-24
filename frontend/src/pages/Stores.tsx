@@ -1,27 +1,45 @@
 import React, { useState } from 'react';
-import { Box, Typography, TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Modal, FormControl, InputLabel, TextField as MuiTextField, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { Box, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, FormControl, MenuItem, InputLabel, Select, SelectChangeEvent } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import useStores from '../data-hooks/useStores';
+import { useStores, useDeleteStore } from '../data-hooks/useStores';
 import PageHeader from '../components/layout/PageHeader';
 import SearchField from '../components/shared/SearchField';
+import AddStoreModal from '../components/stores/AddStoreModal';
+import EditStoreModal from '../components/stores/EditStoreModal';
+import ConfirmDeleteDialog from '../components/stores/ConfirmDeleteDialog';
+import { Store } from '../types/types';
 
 const StoresPage: React.FC = () => {
   const { data: stores = [], isLoading, error } = useStores();
+  const { mutate: deleteStore } = useDeleteStore();
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  const [newStoreName, setNewStoreName] = useState<string>('');
-  const [newStoreAddress, setNewStoreAddress] = useState<string>('');
+  const [openAddModal, setOpenAddModal] = useState<boolean>(false);
+  const [openEditModal, setOpenEditModal] = useState<boolean>(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
+  const [selectedStore, setSelectedStore] = useState<Store | null>(null);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value);
   const handleSortOrderChange = (event: SelectChangeEvent<"asc" | "desc">) => setSortOrder(event.target.value as 'asc' | 'desc');
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => setOpenModal(false);
-  const handleSubmitNewStore = () => {
-    // Implement store creation logic
-    handleCloseModal();
+  const handleOpenAddModal = () => setOpenAddModal(true);
+  const handleCloseAddModal = () => setOpenAddModal(false);
+  const handleOpenEditModal = (store: Store) => {
+    setSelectedStore(store);
+    setOpenEditModal(true);
+  };
+  const handleCloseEditModal = () => setOpenEditModal(false);
+  const handleOpenDeleteDialog = (store: Store) => {
+    setSelectedStore(store);
+    setOpenDeleteDialog(true);
+  };
+  const handleCloseDeleteDialog = () => setOpenDeleteDialog(false);
+  const handleConfirmDelete = () => {
+    if (selectedStore) {
+      deleteStore(selectedStore.id);
+      handleCloseDeleteDialog();
+    }
   };
 
   const filteredStores = stores
@@ -34,18 +52,23 @@ const StoresPage: React.FC = () => {
   return (
     <Box>
       <PageHeader title="Stores" />
-      <Box sx={{ display: 'flex', alignItems: 'center', marginTop: 2, marginBottom: 2 }}>
-        <SearchField label={"Search By Store Name"} searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
-        <FormControl size="small" sx={{ marginLeft: 2 }}>
-          <InputLabel>Sort Order</InputLabel>
-          <Select value={sortOrder} onChange={handleSortOrderChange} label="Sort Order">
-            <MenuItem value="asc">Ascending</MenuItem>
-            <MenuItem value="desc">Descending</MenuItem>
-          </Select>
-        </FormControl>
-        <Button variant="contained" color="primary" sx={{ marginLeft: 2 }} onClick={handleOpenModal}>
-          <AddIcon /> Add Store
-        </Button>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: "space-between", marginTop: 2, marginBottom: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+          <Typography variant="h6" fontWeight={600}>Stores List</Typography>
+          <SearchField label={"Search By Store Name"} searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
+          <FormControl size="small">
+            <InputLabel>Sort Order</InputLabel>
+            <Select value={sortOrder} onChange={handleSortOrderChange} label="Sort Order">
+              <MenuItem value="asc">Ascending</MenuItem>
+              <MenuItem value="desc">Descending</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        <Box alignSelf={"flex-end"}>
+          <Button variant="contained" color="primary" sx={{ marginLeft: 2 }} onClick={handleOpenAddModal}>
+            <AddIcon /> Add New Store
+          </Button>
+        </Box>
       </Box>
       <TableContainer component={Paper}>
         <Table>
@@ -64,10 +87,10 @@ const StoresPage: React.FC = () => {
                 <TableCell>{store.name}</TableCell>
                 <TableCell>{store.address}</TableCell>
                 <TableCell>
-                  <IconButton color="primary">
+                  <IconButton color="primary" onClick={() => handleOpenEditModal(store)}>
                     <EditIcon />
                   </IconButton>
-                  <IconButton color="error">
+                  <IconButton color="error" onClick={() => handleOpenDeleteDialog(store)}>
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
@@ -76,21 +99,9 @@ const StoresPage: React.FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Modal open={openModal} onClose={handleCloseModal}>
-        <Box sx={{ width: 400, padding: 3, margin: 'auto', marginTop: '10%' }} component={Paper}>
-          <Typography variant="h6">Add New Store</Typography>
-          <FormControl fullWidth sx={{ marginTop: 2 }}>
-            <MuiTextField label="Store Name" variant="outlined" value={newStoreName} onChange={(e) => setNewStoreName(e.target.value)} />
-          </FormControl>
-          <FormControl fullWidth sx={{ marginTop: 2 }}>
-            <MuiTextField label="Store Address" variant="outlined" value={newStoreAddress} onChange={(e) => setNewStoreAddress(e.target.value)} />
-          </FormControl>
-          <Box sx={{ marginTop: 2, display: 'flex', justifyContent: 'flex-end' }}>
-            <Button variant="outlined" onClick={handleCloseModal}>Cancel</Button>
-            <Button variant="contained" color="primary" sx={{ marginLeft: 1 }} onClick={handleSubmitNewStore}>Submit</Button>
-          </Box>
-        </Box>
-      </Modal>
+      <AddStoreModal open={openAddModal} onClose={handleCloseAddModal} />
+      {selectedStore && <EditStoreModal open={openEditModal} onClose={handleCloseEditModal} store={selectedStore} />}
+      <ConfirmDeleteDialog open={openDeleteDialog} onClose={handleCloseDeleteDialog} onConfirm={handleConfirmDelete} />
     </Box>
   );
 };

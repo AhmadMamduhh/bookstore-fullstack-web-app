@@ -13,6 +13,6 @@ router.get('/:storeId/books', getBooksInStore);
 router.post('/:storeId/books', addBookToStore);
 router.put('/:storeId/books/:bookId', updateBookInStore);
 router.delete('/:storeId/books/:bookId', removeBookFromStore);
-router.patch('/stores/:storeId/books/:bookId/sell', sellBookInStore);
+router.patch('/:storeId/books/:bookId/sell', sellBookInStore);
 
 export default router;
