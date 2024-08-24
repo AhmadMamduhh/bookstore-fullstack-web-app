@@ -14,7 +14,6 @@ A full-stack bookstore application consisting of a React frontend and an Express
 - [Docker Compose](#docker-compose)
   - [Commands](#commands)
   - [Docker Compose File](#docker-compose-file)
-- [License](#license)
 - [Author](#author)
 
 ## Frontend
