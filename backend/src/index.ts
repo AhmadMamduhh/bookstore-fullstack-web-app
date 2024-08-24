@@ -4,8 +4,11 @@ import bookRoutes from './routes/bookRoutes';
 import authorRoutes from './routes/authorRoutes';
 import storeRoutes from './routes/storeRoutes';
 import storeBookRoutes from './routes/storeBookRoutes';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json());
 

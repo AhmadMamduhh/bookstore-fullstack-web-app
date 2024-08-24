@@ -1,0 +1,37 @@
+# Step 1: Set the base image
+FROM node:18 AS build
+
+# Step 2: Set the working directory
+WORKDIR /usr/src/app
+
+# Step 3: Copy package.json and package-lock.json (or yarn.lock) and install dependencies
+COPY ./package*.json ./
+RUN yarn install
+
+# Step 4: Copy the rest of the application code
+COPY ./ ./
+
+# Step 5: Generate Prisma client
+RUN npx prisma generate
+
+# Step 6: Compile TypeScript (if applicable)
+RUN yarn build
+
+# Step 7: Set the base image for the runtime stage
+FROM node:18 AS runtime
+
+# Step 8: Set the working directory
+WORKDIR /usr/src/app
+
+# Step 9: Copy the built application and Prisma client
+COPY --from=build /usr/src/app/dist ./dist
+COPY --from=build /usr/src/app/node_modules ./node_modules
+
+# Step 10: Copy Prisma schema
+COPY --from=build /usr/src/app/prisma ./prisma
+
+# Step 11: Install Prisma CLI
+RUN yarn global add prisma
+
+# Step 12: Run migrations and seeds
+CMD ["sh", "-c", "npx prisma migrate deploy && npx prisma db seed && npm start"]

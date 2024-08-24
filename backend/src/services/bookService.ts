@@ -1,7 +1,32 @@
 import prisma from '../prismaClient';
 
-const getAllBooks = () => prisma.book.findMany();
-const getBookById = (id: number) => prisma.book.findUnique({ where: { id } });
+export const getAllBooks = () => {
+  return prisma.book.findMany({
+    include: {
+      author: true,
+      stores: {
+        include: {
+          store: true
+        }
+      }
+    }
+  });
+};
+
+export const getBookById = (id: number) => {
+  return prisma.book.findUnique({
+    where: { id },
+    include: {
+      author: true,
+      stores: {
+        include: {
+          store: true
+        }
+      }
+    }
+  });
+};
+
 const createBook = (data: { name: string; pages: number; authorId: number }) =>
   prisma.book.create({ data });
 const updateBook = (id: number, data: { name?: string; pages?: number; authorId?: number }) =>

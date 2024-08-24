@@ -1,0 +1,339 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "name": "The Great Gatsby",
+      "pages": 180,
+      "author": {
+        "id": 1,
+        "name": "F. Scott Fitzgerald"
+      },
+      "stores": [
+        {
+          "store": {
+            "id": 1,
+            "name": "Uptown Books",
+            "address": "789 Broadway, Anytown"
+          },
+          "storeId": 1,
+          "bookId": 1,
+          "price": 24.78,
+          "soldOut": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "1984",
+      "pages": 328,
+      "author": {
+        "id": 2,
+        "name": "George Orwell"
+      },
+      "stores": [
+        {
+          "store": {
+            "id": 1,
+            "name": "Uptown Books",
+            "address": "789 Broadway, Anytown"
+          },
+          "storeId": 1,
+          "bookId": 2,
+          "price": 11.89,
+          "soldOut": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "To Kill a Mockingbird",
+      "pages": 281,
+      "author": {
+        "id": 3,
+        "name": "Harper Lee"
+      },
+      "stores": [
+        {
+          "store": {
+            "id": 2,
+            "name": "Village Books",
+            "address": "202 Elm St, Countryside"
+          },
+          "storeId": 2,
+          "bookId": 3,
+          "price": 22.96,
+          "soldOut": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Moby-Dick",
+      "pages": 635,
+      "author": {
+        "id": 4,
+        "name": "Herman Melville"
+      },
+      "stores": [
+        {
+          "store": {
+            "id": 3,
+            "name": "Harbor Books",
+            "address": "101 Ocean Ave, Seaview"
+          },
+          "storeId": 3,
+          "bookId": 4,
+          "price": 11.19,
+          "soldOut": false
+        },
+        {
+          "store": {
+            "id": 1,
+            "name": "Uptown Books",
+            "address": "789 Broadway, Anytown"
+          },
+          "storeId": 1,
+          "bookId": 4,
+          "price": 17.97,
+          "soldOut": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Pride and Prejudice",
+      "pages": 279,
+      "author": {
+        "id": 5,
+        "name": "Jane Austen"
+      },
+      "stores": [
+        {
+          "store": {
+            "id": 2,
+            "name": "Village Books",
+            "address": "202 Elm St, Countryside"
+          },
+          "storeId": 2,
+          "bookId": 5,
+          "price": 20.37,
+          "soldOut": false
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "The Catcher in the Rye",
+      "pages": 277,
+      "author": {
+        "id": 6,
+        "name": "J.D. Salinger"
+      },
+      "stores": [
+        {
+          "store": {
+            "id": 4,
+            "name": "City Books",
+            "address": "456 Market St, Anytown"
+          },
+          "storeId": 4,
+          "bookId": 6,
+          "price": 14.11,
+          "soldOut": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "The Hobbit",
+      "pages": 310,
+      "author": {
+        "id": 7,
+        "name": "J.R.R. Tolkien"
+      },
+      "stores": [
+        {
+          "store": {
+            "id": 3,
+            "name": "Harbor Books",
+            "address": "101 Ocean Ave, Seaview"
+          },
+          "storeId": 3,
+          "bookId": 7,
+          "price": 20.07,
+          "soldOut": false
+        },
+        {
+          "store": {
+            "id": 2,
+            "name": "Village Books",
+            "address": "202 Elm St, Countryside"
+          },
+          "storeId": 2,
+          "bookId": 7,
+          "price": 11.13,
+          "soldOut": false
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Brave New World",
+      "pages": 268,
+      "author": {
+        "id": 8,
+        "name": "Aldous Huxley"
+      },
+      "stores": [
+        {
+          "store": {
+            "id": 4,
+            "name": "City Books",
+            "address": "456 Market St, Anytown"
+          },
+          "storeId": 4,
+          "bookId": 8,
+          "price": 22.21,
+          "soldOut": false
+        },
+        {
+          "store": {
+            "id": 3,
+            "name": "Harbor Books",
+            "address": "101 Ocean Ave, Seaview"
+          },
+          "storeId": 3,
+          "bookId": 8,
+          "price": 24.88,
+          "soldOut": false
+        },
+        {
+          "store": {
+            "id": 1,
+            "name": "Uptown Books",
+            "address": "789 Broadway, Anytown"
+          },
+          "storeId": 1,
+          "bookId": 8,
+          "price": 18.01,
+          "soldOut": false
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Jane Eyre",
+      "pages": 507,
+      "author": {
+        "id": 9,
+        "name": "Charlotte Brontë"
+      },
+      "stores": [
+        {
+          "store": {
+            "id": 3,
+            "name": "Harbor Books",
+            "address": "101 Ocean Ave, Seaview"
+          },
+          "storeId": 3,
+          "bookId": 9,
+          "price": 14.65,
+          "soldOut": false
+        },
+        {
+          "store": {
+            "id": 5,
+            "name": "Downtown Books",
+            "address": "123 Main St, Anytown"
+          },
+          "storeId": 5,
+          "bookId": 9,
+          "price": 10.87,
+          "soldOut": false
+        },
+        {
+          "store": {
+            "id": 2,
+            "name": "Village Books",
+            "address": "202 Elm St, Countryside"
+          },
+          "storeId": 2,
+          "bookId": 9,
+          "price": 24.81,
+          "soldOut": false
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Crime and Punishment",
+      "pages": 430,
+      "author": {
+        "id": 10,
+        "name": "Fyodor Dostoevsky"
+      },
+      "stores": [
+        {
+          "store": {
+            "id": 2,
+            "name": "Village Books",
+            "address": "202 Elm St, Countryside"
+          },
+          "storeId": 2,
+          "bookId": 10,
+          "price": 23.59,
+          "soldOut": false
+        },
+        {
+          "store": {
+            "id": 1,
+            "name": "Uptown Books",
+            "address": "789 Broadway, Anytown"
+          },
+          "storeId": 1,
+          "bookId": 10,
+          "price": 16,
+          "soldOut": false
+        },
+        {
+          "store": {
+            "id": 3,
+            "name": "Harbor Books",
+            "address": "101 Ocean Ave, Seaview"
+          },
+          "storeId": 3,
+          "bookId": 10,
+          "price": 19.89,
+          "soldOut": false
+        }
+      ]
+    }
+  ],
+  "stores": [
+    {
+      "id": 1,
+      "name": "Uptown Books",
+      "address": "789 Broadway, Anytown"
+    },
+    {
+      "id": 2,
+      "name": "Village Books",
+      "address": "202 Elm St, Countryside"
+    },
+    {
+      "id": 3,
+      "name": "Harbor Books",
+      "address": "101 Ocean Ave, Seaview"
+    },
+    {
+      "id": 4,
+      "name": "City Books",
+      "address": "456 Market St, Anytown"
+    },
+    {
+      "id": 5,
+      "name": "Downtown Books",
+      "address": "123 Main St, Anytown"
+    }
+  ]
+}

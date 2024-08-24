@@ -2,12 +2,34 @@ import { Request, Response } from 'express';
 import bookService from '../services/bookService';
 import { ErrorResponse } from '../types/error';
 
+
 export const getAllBooks = async (req: Request, res: Response) => {
   try {
     const books = await bookService.getAllBooks();
-    res.json(books);
+    // Format the data
+    const formattedBooks = books.map(book => ({
+      id: book.id,
+      name: book.name,
+      pages: book.pages,
+      author: {
+        id: book.author.id,
+        name: book.author.name
+      },
+      stores: book.stores.map(storeBook => ({
+        store: {
+          id: storeBook.store.id,
+          name: storeBook.store.name,
+          address: storeBook.store.address,
+        },
+        storeId: storeBook.storeId,
+        bookId: storeBook.bookId,
+        price: storeBook.price,
+        soldOut: storeBook.soldOut,
+      }))
+    }));
+    res.json(formattedBooks);
   } catch (error) {
-     const err: ErrorResponse = { error: (error as Error).message };
+    const err: ErrorResponse = { error: (error as Error).message };
     res.status(500).json(err);
   }
 };
@@ -17,15 +39,37 @@ export const getBookById = async (req: Request, res: Response) => {
   try {
     const book = await bookService.getBookById(parseInt(id));
     if (book) {
-      res.json(book);
+      // Format the data
+      const formattedBook = {
+        id: book.id,
+        name: book.name,
+        pages: book.pages,
+        author: {
+          id: book.author.id,
+          name: book.author.name,
+        },
+        stores: book.stores.map(storeBook => ({
+          store: {
+            id: storeBook.store.id,
+            name: storeBook.store.name,
+            address: storeBook.store.address,
+          },
+          storeId: storeBook.storeId,
+          bookId: storeBook.bookId,
+          price: storeBook.price,
+          soldOut: storeBook.soldOut,
+        }))
+      };
+      res.json(formattedBook);
     } else {
       res.status(404).json({ error: 'Book not found' });
     }
   } catch (error) {
-     const err: ErrorResponse = { error: (error as Error).message };
+    const err: ErrorResponse = { error: (error as Error).message };
     res.status(500).json(err);
   }
 };
+
 
 export const createBook = async (req: Request, res: Response) => {
   try {

@@ -1,0 +1,14 @@
+{
+  "name": "bookstore-fullstack-web-app",
+  "version": "1.0.0",
+  "description": "A repository containing the frontend (React) and backend (Express) of a bookstore web application",
+  "scripts": {
+    "docker:compose:up": "docker-compose up",
+    "docker:compose:down": "docker-compose down",
+    "docker:compose:build": "docker-compose build",
+    "docker:compose:logs": "docker-compose logs -f"
+  },
+  "keywords": [],
+  "author": "Ahmed Mamdouh",
+  "license": "ISC"
+}
